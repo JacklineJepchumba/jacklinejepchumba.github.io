@@ -1,22 +1,51 @@
-show_downloads: false
-google_analytics: [Your Google Analytics tracking ID]
-google_analytics_anonymize: false
-darkmode: true
-hide_first_title: false # Useful if README.md is used on both github and pages
-logo_url: ./logo.png # Either absolute or relative url
-syntax_theme: ./syntax.css # Leave empty for default, otherwise link to a pygments stylesheet
-colors:
-    gradient_left: "#155799"
-    gradient_right: "#159957"
-    header: "#fff"
-    android_theme: "#000" # this default to gradient_color
-    link: "#1e6bb8" # this default to gradient_color
-    section_title: "#155799" # this default to gradient_color
-buttons:
-      zip_url: http://example.com/
-      zip_title: Title
-      zip_hide: true
-      tar_url: http://example.com/
-      tar_title: Title
-      tar_hide: true
-      github_hide: true # hides "View on Github"
+---
+---
+
+{% if site.darkmode %}
+@import 'darkmode';
+{% endif %}
+
+// Breakpoints
+$large-breakpoint: 64em !default;
+$medium-breakpoint: 42em !default;
+
+// Headers
+$header-heading-color: {{ site.color.header | default: "#fff" }} !default;
+$header-bg-color: {{ site.color.gradient_right | default: "#159957" }} !default;
+$header-bg-color-secondary: {{ site.color.gradient_left | default: "#155799" }} !default;
+
+// Text
+$section-headings-color: {{ site.color.section_title | default: site.color.gradient_right | default: "#159957" }} !default;
+$body-text-color: #606c71 !default;
+$body-link-color: {{ site.color.link | default: site.color.gradient_left | default: "#1e6bb8" }} !default;
+$blockquote-text-color: #819198 !default;
+
+// Code
+$code-bg-color: #f3f6fa !default;
+$code-text-color: #567482 !default;
+
+// Borders
+$border-color: #dce6f0 !default;
+$table-border-color: #e9ebec !default;
+$hr-border-color: #eff0f1 !default;
+
+@import 'jekyll-theme-cayman';
+
+{% if site.logo_url %}
+.project-name::before {
+    content: " ";
+    display: inline-block;
+    width: 0.9em;
+    height: 0.9em;
+    padding-right: 0.5em;
+    vertical-align: middle;
+    background: url("{{site.logo_url}}");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+{% endif %}
+
+{% if site.hide_first_title %}
+    .main-content h1:first-child { display: none; }
+{% endif %}
